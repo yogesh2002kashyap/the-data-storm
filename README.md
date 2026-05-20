@@ -1,4 +1,4 @@
-# The Data Hub v2 🚀
+# The Data Storm 🚀
 
 A production-structured RESTful API built with Node.js, Express, and MongoDB Atlas. This sprint transitions from volatile in-memory storage to persistent cloud database architecture using Mongoose ODM, relational schema design, and aggregation queries.
 
@@ -23,7 +23,7 @@ A production-structured RESTful API built with Node.js, Express, and MongoDB Atl
 
 ## Overview
 
-The Data Hub v2 is the second sprint of a backend engineering series. It replaces the Sprint 09 in-memory array with a persistent MongoDB Atlas cloud database, introduces Mongoose schema validation and ODM patterns, implements relational modeling between Users and Posts using `ref` and `.populate()`, and adds aggregation queries for sorted and limited result sets.
+The Data Storm is the second sprint of a backend engineering series. It replaces the Sprint 09 in-memory array with a persistent MongoDB Atlas cloud database, introduces Mongoose schema validation and ODM patterns, implements relational modeling between Users and Posts using `ref` and `.populate()`, and adds aggregation queries for sorted and limited result sets.
 
 **Key engineering decisions:**
 - Server only starts after a confirmed MongoDB Atlas connection — no silent failures
@@ -50,7 +50,7 @@ The Data Hub v2 is the second sprint of a backend engineering series. It replace
 ## Project Structure
 
 ```
-the-data-hub-v2/
+the-data-storm/
 ├── controllers/
 │   ├── postController.js     # CRUD + populate + top 3 aggregation
 │   └── userController.js     # User creation with validation
