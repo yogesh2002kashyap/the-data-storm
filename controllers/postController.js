@@ -3,7 +3,7 @@ const Post = require('../models/Post');
 // GET /api/posts - return all posts
 const getAllPosts = async (req, res) => {
   try{
-    const posts = await Post.find();
+    const posts = await Post.find().populate('authorId', 'name email');
 
     res.status(200).json({
       status: 'success',
@@ -22,7 +22,7 @@ const getAllPosts = async (req, res) => {
 // GET /api/posts/:id - return single post by id
 const getPostById = async (req, res) => {
   try{
-    const post = await Post.findById(req.params.id);
+    const post = await Post.findById(req.params.id).populate('authorId', 'name email');
 
     if(!post) {
       return res.status(404).json({
@@ -47,9 +47,9 @@ const getPostById = async (req, res) => {
 // POST /api/posts - create a new post
 const createPost = async (req, res) => {
   try {
-    const { title, content, author } = req.body;
+    const { title, content, authorId } = req.body;
 
-    const newPost = await Post.create({ title, content, author });
+    const newPost = await Post.create({ title, content, authorId });
 
     res.status(201).json({
       status: 'success',
@@ -130,10 +130,34 @@ const deletePost = async (req, res) => {
   }
 };
 
+// GET /api/posts/top - return top 3 most rescent posts
+const getTopPosts = async (req, res) => {
+  try {
+    const topPost = await Post.find()
+    .sort({ createdAt: -1 }) // new first 
+    .limit(3)                // Only 3 results
+    .populate('authorId', 'name,email');
+
+    res.status(200).json({
+      status: 'success',
+      count: topPost.length,
+      data: topPost,
+    });
+  }
+  catch(err) {
+    res.status(500).json({
+      status: 'error',
+      message: err.message,
+    });
+  }
+}
+
+
 module.exports = {
   getAllPosts,
   getPostById,
   createPost,
   updatePost,
   deletePost,
+  getTopPosts,
 };

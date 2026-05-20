@@ -12,10 +12,10 @@ const postSchema = new mongoose.Schema(
             required: [true, 'Content is required'],
             trim: true,
         }, 
-        author:  {
-            type: String,
+        authorId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
             required: [true, 'Author is required'],
-            trim: true,
         },
     },
     {

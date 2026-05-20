@@ -5,14 +5,20 @@ require('dotenv').config(); // load .env variavles first
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// Middleware imports
+const logger = require('./middleware/logger');
+
 // Route imports
 const postRouter = require('./routes/posts');
+const usersRouter = require('./routes/users')
 
 // Middleware
 app.use(express.json());
+app.use(logger);
 
 // Routes
 app.use('/api/posts', postRouter);
+app.use('/api/users', usersRouter);
 
 // Health check
 app.get('/', (req, res) => {
