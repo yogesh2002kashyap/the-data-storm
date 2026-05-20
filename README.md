@@ -82,8 +82,8 @@ the-data-hub-v2/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/the-data-hub-v2.git
-cd the-data-hub-v2
+git clone https://github.com/yogesh2002kashyap/the-data-storm.git
+cd the-data-storm
 
 # Install dependencies
 npm install
