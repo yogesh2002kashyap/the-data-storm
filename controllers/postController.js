@@ -26,7 +26,7 @@ const getPostById = async (req, res) => {
 
     if(!post) {
       return res.status(404).json({
-        satus: 'error',
+        status: 'error',
         message: `Post with id ${req.params.id} not found`
       });
     }
@@ -85,7 +85,7 @@ const updatePost = async (req, res) => {
     );
 
     if(!post) {
-      return res.satus(404).json({
+      return res.status(404).json({
         status: 'error',
         message: `Post with id ${req.params.id} not found`,
       });
@@ -130,13 +130,13 @@ const deletePost = async (req, res) => {
   }
 };
 
-// GET /api/posts/top - return top 3 most rescent posts
+// GET /api/posts/top - return top 3 most recent posts
 const getTopPosts = async (req, res) => {
   try {
     const topPost = await Post.find()
     .sort({ createdAt: -1 }) // new first 
     .limit(3)                // Only 3 results
-    .populate('authorId', 'name,email');
+    .populate('authorId', 'name email');
 
     res.status(200).json({
       status: 'success',
