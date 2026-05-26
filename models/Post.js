@@ -17,9 +17,13 @@ const postSchema = new mongoose.Schema(
             ref: 'User',
             required: [true, 'Author is required'],
         },
+        thumbnailUrl: {
+            type: String,
+            default: null, 
+        },
     },
     {
-        timestamps: true, // auto-adds createdAt and updatedA
+        timestamps: true, // auto-adds createdAt and updatedAt
     },
 );
 

@@ -1,4 +1,5 @@
 const Post = require('../models/Post');
+const { uploadToCloudinary } = require('../services/cloudinaryService');
 
 // GET /api/posts - return all posts
 const getAllPosts = async (req, res) => {
@@ -49,7 +50,25 @@ const createPost = async (req, res) => {
   try {
     const { title, content, authorId } = req.body;
 
-    const newPost = await Post.create({ title, content, authorId });
+    if( !title || !content || !authorId ) {
+      return res.status(400).json({
+        status: 'error',
+        message: 'title, content and authorId are required feilds',
+      });
+    }
+
+    // Upload image to Cloudinary if a file was attached
+    let thumbnailUrl = null;
+    if(req.file) {
+      thumbnailUrl = await uploadToCloudinary(req.file.buffer);
+    }
+
+    const newPost = await Post.create({
+      title,
+      content,
+      authorId,
+      thumbnailUrl 
+    });
 
     res.status(201).json({
       status: 'success',
