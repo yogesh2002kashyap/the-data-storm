@@ -70,6 +70,8 @@ const createPost = async (req, res) => {
       thumbnailUrl 
     });
 
+    await newPost.populate('authorId', 'name email');
+
     res.status(201).json({
       status: 'success',
       message: 'Post created successfully',
